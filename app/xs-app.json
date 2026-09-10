@@ -2,10 +2,9 @@
   "welcomeFile": "managepo/webapp/index.html",
   "authenticationMethod": "route",
   "sessionTimeout": 10,
-  "pluginMetadataEndpoint": "/odata/v4/CatelogService/$metadata",
   "routes": [
     {
-      "source": "^managepo/webapp/(.*)",
+      "source": "^/managepo/webapp/(.*)",
       "localDir": "managepo/webapp",
       "target": "$1",
 	  "authenticationType": "xsuaa",
