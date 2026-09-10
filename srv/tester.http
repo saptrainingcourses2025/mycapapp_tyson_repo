@@ -1,0 +1,134 @@
+### Testing the service locally
+http://localhost:4004/odata/v4/MyService/tyson(name='Simon')
+
+###Service Document
+http://localhost:4004/odata/v4/CatelogService
+
+###Expose Metadata
+http://localhost:4004/odata/v4/CatelogService/$metadata 
+
+### Read all Employee data
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet
+Authorization: Basic tyson:Welcome1
+
+###Selected columns
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$select=ID,nameFirst,nameLast,sex,email
+
+###Count the records
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet/$count
+
+###pagination 
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$top=2&$skip=2
+
+###Select a single employee
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+###Filter based on condition
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'&$top=2
+
+###Pattern Match 
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$filter=contains(nameFirst,'Su')
+
+###Sorting the employee
+http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$orderby=salaryAmount desc&$top=5
+
+###Load all the Purchaseorder
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet
+
+###Get single Purchaseorder
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2C052
+
+###Load the Item data for the corresponding PO
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2C052/Items
+
+###Load the PO alsong with items data also
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2C052?$expand=Items
+
+###Using CDS View we do Lazy Loading
+http://localhost:4004/odata/v4/CDSService/ProductSet/74867AD200E41EDBA5D8B06B26EB6052?$expand=To_Items
+
+###OData V4 allows Filtering Child data also
+http://localhost:4004/odata/v4/CDSService/ProductSet/74867AD200E41EDBA5D8B06B26EB6052?$expand=To_Items($filter=TaxAmount le 300)
+
+###Create operation to insert data into database
+POST http://localhost:4004/odata/v4/CatelogService/EmployeeSet
+Content-Type: application/json
+Authorization: Basic simon:Welcome2
+
+{
+  "nameFirst": "Tyson",
+  "nameMiddle": "KuttynaaiJulie",
+  "nameLast": "Simon",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "tyson.simon@itelo.info",
+  "loginName": "TYSSIM",
+  "Currency_code": "USD",
+  "salaryAmount": 60000,
+  "accountNumber": "7766554433",
+  "bankId": "121000",
+  "bankName": "My Bank of Baroda"
+}
+
+###Change data - Update call
+PATCH http://localhost:4004/odata/v4/CatelogService/EmployeeSet/4617f157-0468-47ec-be59-23dde5ee43c4
+Content-Type: application/json
+
+{
+  "nameInitials": "K"
+}
+
+###Testing Deep Insert - pass batch of data together Header+Item
+POST http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet
+Content-Type: application/json
+
+{
+  "CURRENCY_code": "EUR",
+  "GROSS_AMOUNT": 18142.74,
+  "NET_AMOUNT": 15246,
+  "TAX_AMOUNT": 2896.74,
+  "NODE_KEY": "74867AD200E41EDBA5D8B0C98DC21234",
+  "PO_ID": "300005555",
+  "PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885B08052",
+  "LIFECYCLE_STATUS": "N",
+  "OVERALL_STATUS": "P",
+  "NOTE": "Example for 2 items",
+  "Items": [
+    {
+      "CURRENCY_code": "DKK",
+      "GROSS_AMOUNT": 2424.03,
+      "NET_AMOUNT": 2037,
+      "TAX_AMOUNT": 387.03,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35C6011",
+      "PO_ITEM_POS": 10,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F64052"
+    },
+    {
+      "CURRENCY_code": "DKK",
+      "GROSS_AMOUNT": 1783.81,
+      "NET_AMOUNT": 1499,
+      "TAX_AMOUNT": 284.81,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35C6012",
+      "PO_ITEM_POS": 20,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F0A052"
+    }
+  ]
+}
+
+### Test the created PO using deep insert
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC21234?$expand=Items
+
+###Test the Function concepts
+http://localhost:4004/odata/v4/CatelogService/getLargestOrder()
+
+
+###Check the Before boosting the GROSS_AMOUNT
+http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2C052
+
+###Test the Action concepts
+POST http://localhost:4004/odata/v4/CatelogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC2C052/boost
+Content-Type: application/json
+
+{}

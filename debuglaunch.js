@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [ 
+
+        {
+            "type": "node-terminal",
+            "request": "launch",
+            "name": "Tyson's CAPM Project",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "command": "cds watch",
+            "cwd": "${workspaceFolder}/mycapapp"
+        }
+    ]
+}
