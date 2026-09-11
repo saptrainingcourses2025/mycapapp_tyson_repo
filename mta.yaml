@@ -48,7 +48,6 @@ modules:
     requires:
       - name: mycapapp-auth
       - name: mycapapp-db
-
   - name: mycapapp-db-deployer
     type: hdb
     path: gen/db
