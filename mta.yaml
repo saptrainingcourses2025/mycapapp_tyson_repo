@@ -12,7 +12,7 @@ build-parameters:
         - npx cds build --production
 modules:
 
-###Manualy adding our UI Module = Fiori ui+approuter
+  ###Manualy adding our UI Module = Fiori ui+approuter
   - name: mycapapp-ui
     type: nodejs
     path: app
@@ -30,7 +30,7 @@ modules:
           strictSSL: true
           forwardAuthToken: true
           url: '~{srv-url}'
-###End of adding 
+  ###End of adding 
 
   - name: mycapapp-srv
     type: nodejs
@@ -64,7 +64,7 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: mycapapp-${org}-${space}
+        xsappname: 'mycapapp-${org}-${space}'
         tenant-mode: dedicated
         oauth2-configuration:
           credential-types:
