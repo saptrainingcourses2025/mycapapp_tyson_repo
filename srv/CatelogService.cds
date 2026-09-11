@@ -16,28 +16,13 @@ service CatelogService @(path: 'CatelogService', requires: 'authenticated-user')
     entity StatusCode as projection on master.StatusCode;
     @Capabilities : { Deletable: false }
     entity PurchaseOrderSet @(
-                            // restrict: [
-                            //     { grant: ['READ'], to: 'Viewer' },
-                            //     { grant: ['WRITE', 'DELETE'], to: 'Editor' } 
-                            // ],
+                            restrict: [
+                                { grant: ['READ'], to: 'Viewer' },
+                                { grant: ['WRITE', 'DELETE'], to: 'Editor' } 
+                            ],
                             odata.draft.enabled: true,
                             Common.DefaultValuesFunction: 'getDefaultValue' ) as projection on transaction.purchaseorder{
         *,
-        // CASE OVERALL_STATUS
-        //     when 'P' then 'Pending'
-        //     when 'A' then 'Approved' 
-        //     when 'X' then 'Rejected'
-        //     when 'D' then 'Deliverd'
-        //     else 'Unknown'
-        //         end as OverallStatus: String(10),
-
-        // CASE OVERALL_STATUS
-        //     when 'P' then 2
-        //     when 'A' then 3
-        //     when 'X' then 1
-        //     when 'D' then 3
-        //     else 0
-        //         end as colorchng: Integer
         case when OVERALL_STATUS = 'A' then cast(3 as Integer)
             when OVERALL_STATUS = 'D' then cast(3 as Integer)
             when OVERALL_STATUS = 'X' then cast(1 as Integer)
