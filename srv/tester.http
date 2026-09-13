@@ -10,6 +10,7 @@ http://localhost:4004/odata/v4/CatelogService/$metadata
 ### Read all Employee data
 http://localhost:4004/odata/v4/CatelogService/EmployeeSet
 Authorization: Basic tyson:Welcome1
+# Authorization: Basic simon:Welcome2
 
 ###Selected columns
 http://localhost:4004/odata/v4/CatelogService/EmployeeSet?$select=ID,nameFirst,nameLast,sex,email
@@ -73,11 +74,12 @@ Authorization: Basic simon:Welcome2
 }
 
 ###Change data - Update call
-PATCH http://localhost:4004/odata/v4/CatelogService/EmployeeSet/4617f157-0468-47ec-be59-23dde5ee43c4
+PATCH http://localhost:4004/odata/v4/CatelogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C198A7FB
+Authorization: Basic tyson:Welcome1
 Content-Type: application/json
 
 {
-  "nameInitials": "K"
+  "salaryAmount": 1200
 }
 
 ###Testing Deep Insert - pass batch of data together Header+Item
