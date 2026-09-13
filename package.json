@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@cap-js-community/odata-v2-adapter": "^1.16.1",
+    "@cap-js/attachments": "^4.0.0",
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
     "@sap/xssec": "^4"
@@ -28,7 +29,9 @@
       "db": {
         "[development]": {
           "kind": "sqlite",
-          "credentials": {"url": "db.sqlite"} 
+          "credentials": {
+            "url": "db.sqlite"
+          }
         },
         "[production]": {
           "kind": "hana"
@@ -41,7 +44,8 @@
             "tyson": {
               "password": "Welcome1",
               "roles": [
-                "Viewer"
+                "Display",
+                "Edit"
               ],
               "attr": {
                 "spiderman": [
@@ -52,7 +56,7 @@
             "simon": {
               "password": "Welcome2",
               "roles": [
-                "Editor"
+                "Edit"
               ]
             }
           }

@@ -12,14 +12,6 @@
   {
    "name": "$XSAPPNAME.Delete",
    "description": "delete"
-  },
-  {
-   "name": "$XSAPPNAME.Viewer",
-   "description": "Viewer"
-  },
-  {
-   "name": "$XSAPPNAME.Editor",
-   "description": "Editor"
   }
  ],
  "attributes": [
