@@ -37,7 +37,6 @@ modules:
         properties:
           name: mtx-api # must be used in xs-app.json as well
           url: ~{mtx-url}
-      - name: mycapapp-auth
     provides:
       - name: app-api
         properties:
@@ -56,7 +55,7 @@ modules:
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
-          srv-url: ${default-url}
+          srv-url: '${default-url}'
     requires:
       - name: mycapapp-auth
       - name: mycapapp-db
