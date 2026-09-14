@@ -5,7 +5,7 @@ context CDSViews {
     define view ![POWorkList] as 
         select from transaction.purchaseorder{
             Key PO_ID as![PurchaseOrderId],
-            Items.PO_ITEM_POS as![ItemPosition],
+            key Items.PO_ITEM_POS as![ItemPosition],
             PARTNER_GUID.BP_ID as![PartnerId],
             PARTNER_GUID.COMPANY_NAME as![CompanyName],
             GROSS_AMOUNT as![GrossAmount],
